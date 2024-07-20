@@ -2,7 +2,7 @@ function solicitarDato(tipo, mensaje, sugerencia = '') {
     let dato;
     if (tipo == 'numero') {
         do {
-            dato = parseFloat(prompt(mensaje, sugerencia));
+            dato = parseFloat(prompt(mensaje, sugerencia)); 
         } while (isNaN(dato) || dato < 0);
     } else if (tipo == 'numeroEntero') {
         do {
@@ -10,7 +10,7 @@ function solicitarDato(tipo, mensaje, sugerencia = '') {
         } while (isNaN(dato) || dato < 0);
     } else if (tipo == 'cadena') {
         do {
-            dato = prompt(mensaje, sugerencia).toLowerCase();
+            dato = prompt(mensaje, sugerencia).toUpperCase();
         } while (dato == '');
     }
     return dato;

@@ -6,7 +6,7 @@ class Productos {
 	}
 
 	agregarProducto(producto) {
-		if (this.validarIdUnico(producto.id)) {
+		if (!this.yaExisteId(producto.id)) {
 			this.lista.push(producto);
 			return true;
 		}
@@ -15,24 +15,24 @@ class Productos {
 
 	cargarEjemplos() {
 		this.lista = [
-			new Producto('0001', 'Computadoras', 'Notebook ASUS', 65000, 8),
-			new Producto('0002', 'Computadoras', 'PC de Escritorio HP', 75000, 10),
-			new Producto('0003', 'Celulares', 'Samsung Galaxy S21', 60000, 15),
-			new Producto('0004', 'Tablets', 'iPad Air', 40000, 20),
-			new Producto('0005', 'Computadoras', 'Laptop Dell', 70000, 12),
-			new Producto('0006', 'Computadoras', 'Mini PC Lenovo', 50000, 7),
-			new Producto('0007', 'Celulares', 'iPhone 12', 80000, 5),
-			new Producto('0008', 'Tablets', 'Samsung Galaxy Tab S7', 55000, 10),
+			new Producto('0001', 'COMPUTADORAS', 'LAPTOP ASUS', 65000, 8),
+			new Producto('0002', 'COMPUTADORAS', 'DESKTOP HP', 75000, 10),
+			new Producto('0003', 'CELULARES', 'SAMSUNG GALAXY S21', 60000, 15),
+			new Producto('0004', 'TABLETS', 'IPAD AIR', 40000, 20),
+			new Producto('0005', 'COMPUTADORAS', 'LAPTOP DELL', 70000, 12),
+			new Producto('0006', 'COMPUTADORAS', 'MINI PC LENOVO', 50000, 7),
+			new Producto('0007', 'CELULARES', 'IPHONE 12', 80000, 5),
+			new Producto('0008', 'TABLETS', 'SAMSUNG GALAXY TAB S7', 55000, 10),
 		];
 	}
 
-	validarIdUnico(id) {
-		//return this.lista.includes(id);
-		return this.lista.some((producto) => producto.id == id);
+	yaExisteId(id) {
+		return this.lista.some((producto) => producto.id.includes(id));
 	}
 
 	buscarId(id) {
-		return this.lista.find((producto) => producto.id.toLowerCase() == id.toLowerCase());
+		return this.lista.find((producto) => producto.id.toUpperCase() === id.toUpperCase());
+		//return this.lista.find((producto) => producto.id.includes(id));
 	}
 
 	incrementarPrecios(porcentaje) {
@@ -42,12 +42,12 @@ class Productos {
 	}
 
 	filtrarProductos(busqueda) {
-		const result = this.lista.filter((producto) => (producto.nombre.toLowerCase().indexOf(busqueda) != -1 || producto.rubro.toLowerCase().indexOf(busqueda) != -1));
+		const result = this.lista.filter((producto) => (producto.nombre.toUpperCase().indexOf(busqueda) != -1 || producto.rubro.toUpperCase().indexOf(busqueda) != -1));
 		return result;
 	}
 
 	eliminarProducto(id) {
-		let indice = this.lista.findIndex((producto) => producto.id.toLowerCase() === id.toLowerCase());
+		let indice = this.lista.findIndex((producto) => producto.id.toUpperCase() === id.toUpperCase());
 		if(indice != -1){
 			this.lista.splice(indice, 1);
 			return true;
